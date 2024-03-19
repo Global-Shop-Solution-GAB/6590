@@ -1,0 +1,664 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.FormFS..Create(BaseForm)
+Gui.FormFS..Caption("ARC 6590 - Issue Material from Lot/Bin to WOs on Flexible Schedule")
+Gui.FormFS..Size(632,477)
+Gui.FormFS..MinX(0)
+Gui.FormFS..MinY(0)
+Gui.FormFS..Position(0,0)
+Gui.FormFS..AlwaysOnTop(False)
+Gui.FormFS..FontName("Tahoma")
+Gui.FormFS..FontSize(8.25)
+Gui.FormFS..ControlBox(True)
+Gui.FormFS..MaxButton(True)
+Gui.FormFS..MinButton(True)
+Gui.FormFS..MousePointer(0)
+Gui.FormFS..Moveable(True)
+Gui.FormFS..Sizeable(True)
+Gui.FormFS..ShowInTaskBar(True)
+Gui.FormFS..TitleBar(True)
+Gui.FormFS..Event(UnLoad,FormFS_UnLoad)
+Gui.FormFS.lbl1.Create(Label,"Schedule number",True,98,13,0,15,18,True,0,"Tahoma",8.25,,0,0)
+Gui.FormFS.lbl1.BorderStyle(0)
+Gui.FormFS.lbl1.FontStyle(True,False,False,False,False)
+Gui.FormFS.cmd_FSBrowser.Create(Button)
+Gui.FormFS.cmd_FSBrowser.Enabled(True)
+Gui.FormFS.cmd_FSBrowser.Visible(True)
+Gui.FormFS.cmd_FSBrowser.Zorder(0)
+Gui.FormFS.cmd_FSBrowser.Size(39,23)
+Gui.FormFS.cmd_FSBrowser.Position(288,14)
+Gui.FormFS.cmd_FSBrowser.Caption("")
+Gui.FormFS.cmd_FSBrowser.FontName("Tahoma")
+Gui.FormFS.cmd_FSBrowser.FontSize(8.25)
+Gui.FormFS.cmd_FSBrowser.Event(Click,cmd_FSBrowser_Click)
+Gui.FormFS.cmd_FSBrowser.SvgPicture("icon_browser_color")
+Gui.FormFS.cmd_FSBrowser.ImageAlign(8)
+Gui.FormFS.txt_FS.Create(TextBox,"",True,157,20,0,123,14,True,0,"Tahoma",8.25,,1)
+Gui.FormFS.txt_FS.Locked(True)
+Gui.FormFS.gsgcFS.Create(GsGridControl)
+Gui.FormFS.gsgcFS.Enabled(True)
+Gui.FormFS.gsgcFS.Visible(True)
+Gui.FormFS.gsgcFS.Zorder(0)
+Gui.FormFS.gsgcFS.Size(604,282)
+Gui.FormFS.gsgcFS.Position(15,152)
+Gui.FormFS.gsgcFS.Anchor(15)
+Gui.FormFS.lbl2.Create(Label,"All Work Orders",True,88,13,0,15,129,True,0,"Tahoma",8.25,,0,0)
+Gui.FormFS.lbl2.BorderStyle(0)
+Gui.FormFS.lbl2.FontStyle(True,False,False,False,False)
+Gui.FormFS.gsgcQty.Create(GsGridControl)
+Gui.FormFS.gsgcQty.Enabled(True)
+Gui.FormFS.gsgcQty.Visible(True)
+Gui.FormFS.gsgcQty.Zorder(0)
+Gui.FormFS.gsgcQty.Size(606,70)
+Gui.FormFS.gsgcQty.Position(15,48)
+Gui.FormFS.gsgcQty.Anchor(13)
+Gui.FormFS.cmdLotBin.Create(Button)
+Gui.FormFS.cmdLotBin.Enabled(True)
+Gui.FormFS.cmdLotBin.Visible(True)
+Gui.FormFS.cmdLotBin.Zorder(0)
+Gui.FormFS.cmdLotBin.Size(75,23)
+Gui.FormFS.cmdLotBin.Position(512,14)
+Gui.FormFS.cmdLotBin.Caption("Lot / Bin")
+Gui.FormFS.cmdLotBin.FontName("Tahoma")
+Gui.FormFS.cmdLotBin.FontSize(8.25)
+Gui.FormFS.cmdLotBin.Event(Click,cmdLotBin_Click)
+Gui.FormFS.cmdLotBin.Anchor(9)
+Gui.FormLot..Create(BaseForm)
+Gui.FormLot..Caption("Form")
+Gui.FormLot..Size(754,473)
+Gui.FormLot..MinX(0)
+Gui.FormLot..MinY(0)
+Gui.FormLot..Position(0,0)
+Gui.FormLot..AlwaysOnTop(False)
+Gui.FormLot..FontName("Tahoma")
+Gui.FormLot..FontSize(8.25)
+Gui.FormLot..ControlBox(True)
+Gui.FormLot..MaxButton(True)
+Gui.FormLot..MinButton(True)
+Gui.FormLot..MousePointer(0)
+Gui.FormLot..Moveable(True)
+Gui.FormLot..Sizeable(True)
+Gui.FormLot..ShowInTaskBar(True)
+Gui.FormLot..TitleBar(True)
+Gui.FormLot..Event(UnLoad,FormLot_UnLoad)
+Gui.FormLot.lbl1.Create(Label,"Raw Material",True,74,13,0,26,18,True,0,"Tahoma",8.25,,0,0)
+Gui.FormLot.lbl1.BorderStyle(0)
+Gui.FormLot.lbl1.FontStyle(True,False,False,False,False)
+Gui.FormLot.txtPart.Create(TextBox,"",True,119,20,0,113,14,False,0,"Tahoma",8.25,,1)
+Gui.FormLot.lbl2.Create(Label,"Total Mat Required Qty",True,131,13,0,288,18,True,0,"Tahoma",8.25,,0,0)
+Gui.FormLot.lbl2.BorderStyle(0)
+Gui.FormLot.lbl2.FontStyle(True,False,False,False,False)
+Gui.FormLot.txtQty.Create(TextBox,"",True,87,20,0,428,14,False,0,"Tahoma",8.25,,1)
+Gui.FormLot.gscgLot.Create(GsGridControl)
+Gui.FormLot.gscgLot.Enabled(True)
+Gui.FormLot.gscgLot.Visible(True)
+Gui.FormLot.gscgLot.Zorder(0)
+Gui.FormLot.gscgLot.Size(724,354)
+Gui.FormLot.gscgLot.Position(16,47)
+Gui.FormLot.gscgLot.Anchor(15)
+Gui.FormLot.gscgLot.Event(RowCellClick,gscgLot_RowCellClick)
+Gui.FormLot.lbl3.Create(Label,"Rounded Qty",True,73,13,0,574,18,True,0,"Tahoma",8.25,,0,0)
+Gui.FormLot.lbl3.BorderStyle(0)
+Gui.FormLot.lbl3.FontStyle(True,False,False,False,False)
+Gui.FormLot.txtRoundQty.Create(TextBox,"",True,74,20,0,655,14,False,0,"Tahoma",8.25,,1)
+Gui.FormLot.cmIssue.Create(Button)
+Gui.FormLot.cmIssue.Enabled(True)
+Gui.FormLot.cmIssue.Visible(True)
+Gui.FormLot.cmIssue.Zorder(0)
+Gui.FormLot.cmIssue.Size(91,23)
+Gui.FormLot.cmIssue.Position(612,410)
+Gui.FormLot.cmIssue.Caption("Issue Material")
+Gui.FormLot.cmIssue.FontName("Tahoma")
+Gui.FormLot.cmIssue.FontSize(8.25)
+Gui.FormLot.cmIssue.Event(Click,cmIssue_Click)
+Gui.FormLot.cmIssue.Anchor(10)
+Gui.FormLot.txtQtyRemaining.Create(TextBox,"",True,82,20,0,476,412,False,0,"Tahoma",8.25,,1)
+Gui.FormLot.txtQtyRemaining.Anchor(10)
+Gui.FormLot.lbl4.Create(Label,"Qty Remaining:",True,74,13,0,398,416,True,0,"Tahoma",8.25,,0,0)
+Gui.FormLot.lbl4.BorderStyle(0)
+Gui.FormLot.lbl4.Anchor(10)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.sPart.Declare(String)
+V.Global.fTotalMatQty.Declare(Float)
+V.Global.fRoundQty.Declare(Float)
+V.Global.sError.Declare(String)
+
+Program.External.Include.Library("450100.lib")
+Program.Sub.Preflight.End
+Program.Sub.Main.Start
+'Author: Arturo Almaguer
+'Date: 27 January 2022
+'Customer: FABCON, quote number 13022
+'This program issues material to WOs on a flex schedule
+'This script is launched off a new custom menu item created under Shop Floor Control > Transactions > Issue Material to Flexible Schedule [6590]
+
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+
+F.Intrinsic.Control.Try
+
+	Gui.FormFS.cmdLotBin.Enabled(False)
+	GUI.FormFS.lbl2.Visible(False)
+	GUI.FormFS.gsgcQty.Visible(False)
+	GUI.FormFS.gsgcFS.Visible(False)
+	GUI.FormFS..Show
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.Main.End
+Program.Sub.cmd_FSBrowser_Click.Start
+'This subroutine loads a browser to let the user choose the flex schedule they want
+
+F.Intrinsic.Control.Try
+
+	V.Local.sSelectedFS.Declare(String)
+	V.Local.sTitles.Declare(String)
+	V.Local.iWidths.Declare(Long)
+	v.Local.sSQL.Declare(String)
+	
+	F.Intrinsic.String.Split("Flexible Schedule*!*Suffix","*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split("100*!*100","*!*",V.Local.iWidths)
+	
+	'Creating browser with all flex schedules
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	F.Intrinsic.UI.Browser("Select the flexible schedule number","Con","select distinct RTRIM(SCHEDULE) SCHEDULE, RTRIM(SCHEDULE_SUFFIX) SCHEDULE_SUFFIX from JOB_CT_FLX_SCHD", V.Local.sTitles, V.Local.iWidths, 6000, 8000, V.Local.sSelectedFS)
+	F.ODBC.Connection!Con.Close
+	
+	'If a FS was chosen, then call sub to load all jobs within FS
+	F.Intrinsic.Control.If(V.Local.sSelectedFS.IsNotCancel)
+		
+		F.Intrinsic.String.Split(V.Local.sSelectedFS, "*!*", V.Local.sSelectedFS)
+		F.Intrinsic.String.Build("{0}-{1}", V.Local.sSelectedFS(0), V.Local.sSelectedFS(1), V.Local.sSQL)
+		GUI.FormFS.txt_FS.Text(V.Local.sSQL)
+		F.Intrinsic.Control.CallSub("LoadDataFS", "FS", V.Local.sSelectedFS(0), "FSSuf", V.Local.sSelectedFS(1))
+		
+	F.Intrinsic.Control.EndIf
+	
+	'Enabling controls
+	Gui.FormFS.cmdLotBin.Enabled(True)
+	GUI.FormFS.lbl2.Visible(True)
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.cmd_FSBrowser_Click.End
+Program.Sub.LoadDataFS.Start
+'This subroutine loads all the jobs within the FS
+
+F.Intrinsic.Control.Try
+
+	V.Local.sSQL.Declare(String)
+	V.Local.sDesc.Declare(String)
+	
+	'To check if datatables already exists
+	F.Intrinsic.Control.If(V.DataTable.dtJobs.Exists)
+		F.Data.DataTable.Close("dtJobs")
+	F.Intrinsic.Control.EndIf
+	
+	'Getting all workorders grouped in the flex schedule 
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	F.Intrinsic.String.Build("select RTRIM(JOB) + RTRIM(SUFFIX) JS, RTRIM(JOB) + RTRIM(SUFFIX) + RTRIM(LABOR_SEQ) JSS, RTRIM(JOB) JOB, RTRIM(SUFFIX) SUFFIX, RTRIM(LABOR_SEQ) LABOR_SEQ, RTRIM(LABOR_WC) WC, RTRIM(MATL_SEQ) MATL_SEQ, RTRIM(JOB) + RTRIM(SUFFIX) + RTRIM(MATL_SEQ) JSS_MAT from JOB_CT_FLX_SCHD where SCHEDULE = '{0}' and SCHEDULE_SUFFIX = '{1}' ", V.Args.FS,  V.Args.FSSuf, V.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtJobs", "Con", V.Local.sSQL, True)
+	
+	'Getting the estimated qty for each job
+	F.Data.Dictionary.CreateFromSQL("dictQty", "Con", "select RTRIM(JOB) + RTRIM(SUFFIX) + RTRIM(SEQ) JSS, UNITS_OPEN from V_JOB_OPERATIONS;")
+	F.Data.Dictionary.SetDefaultReturn("dictQty", "0.00")
+	F.Data.DataTable.AddColumn("dtJobs", "QTY", "Float")
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dictQty", "JSS", "QTY")
+	F.Data.Dictionary.Close("dictQty")
+	
+	'Getting the material qty for each job
+	F.Data.Dictionary.CreateFromSQL("dictMatQty", "Con", "select RTRIM(JOB) + RTRIM(SUFFIX) JS, QTY_COMMITTED - QTY_ISSUED as MAT_QTY from V_JOB_COMMITMENTS;")
+	F.Data.Dictionary.SetDefaultReturn("dictMatQty", "0.00")
+	F.Data.DataTable.AddColumn("dtJobs", "MAT_QTY", "Float")
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dictMatQty", "JS", "MAT_QTY")
+	F.Data.Dictionary.Close("dictMatQty")
+	
+	'Getting the part for each job, which would be the same
+	F.Data.Dictionary.CreateFromSQL("dictPart", "Con", "select RTRIM(JOB) + RTRIM(SUFFIX) + RTRIM(SEQ) JSS_MAT, RTRIM(PART) PART from V_JOB_OPERATIONS;")
+	F.Data.Dictionary.SetDefaultReturn("dictPart", "")
+	F.Data.DataTable.AddColumn("dtJobs", "PART", "String")
+	F.Data.DataTable.FillFromDictionary("dtJobs", "dictPart", "JSS_MAT", "PART")
+	F.Data.Dictionary.Close("dictPart")
+	
+	'Adding column to sum the mat_qty column for all records
+	f.Data.DataTable.AddExpressionColumn("dtJobs", "TOTAL_MAT_QTY", "Float", "SUM(MAT_QTY)")
+	
+	'To check if datatables already exists
+	F.Intrinsic.Control.If(V.DataTable.dtTotalMatQty.Exists)
+		F.Data.DataTable.Close("dtTotalMatQty")
+	F.Intrinsic.Control.EndIf
+	
+	'Creating datable to be displayed in the other gv
+	F.Data.DataView.Create("dtJobs", "dvJobs", 22, "", "")
+	f.Data.DataView.ToDataTableDistinct("dtJobs", "dvJobs", "dtTotalMatQty", "PART", True)
+	f.Data.DataView.Close("dtJobs", "dvJobs")
+	F.Data.DataTable.AddColumn("dtTotalMatQty", "DESCRIPTION", "String")
+	F.Data.DataTable.AddColumn("dtTotalMatQty", "TOTAL_MAT_QTY", "Float")
+	
+	'Getting the part's description
+	V.Global.sPart.Set(V.DataTable.dtTotalMatQty(0).PART!FieldValTrim)
+	V.Global.fTotalMatQty.Set(V.DataTable.dtJobs(0).TOTAL_MAT_QTY!FieldValTrim)
+	F.Intrinsic.String.Build("select RTRIM(DESCRIPTION) DESCRIPTION from V_INVENTORY_MSTR where PART = '{0}';", V.Global.sPart, V.Local.sSQL)
+	F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL, V.Local.sDesc)
+	f.Data.DataTable.SetValue("dtTotalMatQty", 0, "DESCRIPTION", V.Local.sDesc, "TOTAL_MAT_QTY", V.Global.fTotalMatQty)
+	F.ODBC.Connection!Con.Close
+	
+	'Calling for grid properties
+	F.Intrinsic.Control.CallSub("LoadGridFS")
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.LoadDataFS.End
+Program.Sub.LoadGridFS.Start
+'This subroutine formats both grids
+
+F.Intrinsic.Control.Try
+
+	'''Setting properties for gv#1
+	GUI.FormFS.gsgcFS.AddGridviewFromDatatable("gvJobs", "dtJobs")
+	
+	''General Gridview properties
+	GUI.FormFS.gsgcFS.SetGridviewProperty("gvJobs", V.Enum.GridViewPropertyNames!EnableAppearanceOddRow, True)
+	GUI.FormFS.gsgcFS.SetGridviewProperty("gvJobs", V.Enum.GridViewPropertyNames!RowAutoHeight, True)
+	GUI.FormFS.gsgcFS.SetGridviewProperty("gvJobs", V.Enum.GridViewPropertyNames!ColumnPanelRowHeight, 45)
+	GUI.FormFS.gsgcFS.SetGridviewProperty("gvJobs", V.Enum.GridViewPropertyNames!EnableAppearanceFocusedRow, True) 
+	GUI.FormFS.gsgcFS.SetGridviewProperty("gvJobs", V.Enum.GridViewPropertyNames!ShowAutoFilterRow, True) 
+	GUI.FormFS.gsgcFS.SetGridviewProperty("gvJobs", "OptionsViewColumnAutoWidth", True) 'It allows the user to adjust the column widths
+	
+	''Column properties
+	'Invisible columns
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JSS", V.Enum.ColumnPropertyNames!Visible, False)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JS", V.Enum.ColumnPropertyNames!Visible, False)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "MAT_QTY", V.Enum.ColumnPropertyNames!Visible, False)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!Visible, False)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "MATL_SEQ", V.Enum.ColumnPropertyNames!Visible, False)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JSS_MAT", V.Enum.ColumnPropertyNames!Visible, False)
+	
+	'Formatting captions
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JOB", V.Enum.ColumnPropertyNames!Caption, "Job")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "SUFFIX", V.Enum.ColumnPropertyNames!Caption, "Suffix")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "LABOR_SEQ", V.Enum.ColumnPropertyNames!Caption, "Seq")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "PART", V.Enum.ColumnPropertyNames!Caption, "Raw Material")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "WC", V.Enum.ColumnPropertyNames!Caption, "WC")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "QTY", V.Enum.ColumnPropertyNames!Caption, "Est. Quantity")
+	
+	'Formatting headers
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JOB", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "SUFFIX", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "LABOR_SEQ", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "PART", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "WC", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "QTY", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	
+	'Formatting headers allignment
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JOB", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "SUFFIX", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "LABOR_SEQ", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "PART", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "WC", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "QTY", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	
+	'Formatting widths
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "JOB", V.Enum.ColumnPropertyNames!MaxWidth, 90)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "SUFFIX", V.Enum.ColumnPropertyNames!MaxWidth, 90)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "LABOR_SEQ", V.Enum.ColumnPropertyNames!MaxWidth, 90)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "PART", V.Enum.ColumnPropertyNames!MinWidth, 160)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "WC", V.Enum.ColumnPropertyNames!MaxWidth, 90)
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "QTY", V.Enum.ColumnPropertyNames!MinWidth, 100)
+	
+	''Fromatting QTY column
+	GUI.FormFS.gsgcFS.SetColumnProperty("gvJobs", "QTY", V.Enum.ColumnPropertyNames!DisplayCustomNumeric, "#,##0.00")
+	
+	'''Setting properties for gv#2
+	GUI.FormFS.gsgcQty.AddGridviewFromDatatable("gvTotalMatQty", "dtTotalMatQty")
+	
+	''General Gridview properties
+	GUI.FormFS.gsgcQty.SetGridviewProperty("gvTotalMatQty", V.Enum.GridViewPropertyNames!RowAutoHeight, True)
+	GUI.FormFS.gsgcQty.SetGridviewProperty("gvTotalMatQty", V.Enum.GridViewPropertyNames!EnableAppearanceFocusedRow, True) 
+	GUI.FormFS.gsgcQty.SetGridviewProperty("gvTotalMatQty", "OptionsViewColumnAutoWidth", True)
+	GUI.FormFS.gsgcQty.SetGridviewProperty("gvTotalMatQty", V.Enum.GridViewPropertyNames!EnableAppearanceOddRow, True)
+	GUI.FormFS.gsgcQty.SetGridviewProperty("gvTotalMatQty", V.Enum.GridViewPropertyNames!ColumnPanelRowHeight, 45)
+	
+	''Column properties
+	'Formatting captions
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "PART", V.Enum.ColumnPropertyNames!Caption, "Raw Material")
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "DESCRIPTION", V.Enum.ColumnPropertyNames!Caption, "Description")
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!Caption, "Total Material Required Qty")
+	
+	'Formatting headers
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "PART", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "DESCRIPTION", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!HeaderWordWrap, "Wrap")
+	
+	'Formatting headers allignment
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "PART", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "DESCRIPTION", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	
+	'Formatting widths
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "PART", V.Enum.ColumnPropertyNames!MinWidth, 160)
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "DESCRIPTION", V.Enum.ColumnPropertyNames!MinWidth, 280)
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!MinWidth, 120)
+	
+	''Fromatting QTY column
+	GUI.FormFS.gsgcQty.SetColumnProperty("gvTotalMatQty", "TOTAL_MAT_QTY", V.Enum.ColumnPropertyNames!DisplayCustomNumeric, "#,##0.00")
+	
+	'Displaying both gvs in form
+	GUI.FormFS.gsgcQty.MainView("gvTotalMatQty")
+	GUI.FormFS.gsgcFS.MainView("gvJobs")
+	GUI.FormFS.gsgcQty.Visible(True)
+	GUI.FormFS.gsgcFS.Visible(True)
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.LoadGridFS.End
+Program.Sub.FormFS_UnLoad.Start
+'Making form invisible
+GUI.FormFS..Visible(False)
+
+''Closes the connection if it is open
+f.Intrinsic.Control.If(v.ODBC.con.exists,=,"1") 	
+    f.ODBC.Connection!Con.Close
+f.Intrinsic.Control.EndIf
+
+'End program
+F.Intrinsic.Control.End()
+Program.Sub.FormFS_UnLoad.End
+Program.Sub.FormLot_UnLoad.Start
+GUI.FormLot..Visible(False)
+Program.Sub.FormLot_UnLoad.End
+Program.Sub.LoadDataLot.Start
+'This subroutine loads lot/bin data
+F.Intrinsic.Control.Try
+
+	V.Local.sSQL.Declare(String)
+	V.Local.sDesc.Declare(String)
+	
+	'To check if datatables already exists
+	F.Intrinsic.Control.If(V.DataTable.dtLot.Exists)
+		F.Data.DataTable.Close("dtLot")
+	F.Intrinsic.Control.EndIf
+	
+	'Getting all lot/bin for the part being processed in the FS
+	F.ODBC.Connection!Con.OpenCompanyConnection
+	F.Intrinsic.String.Build("select RTRIM(LOT) LOT, RTRIM(BIN) BIN, QUANTITY, RTRIM(HEAT) HEAT, RTRIM(SERIAL_NUMBER) SERIAL_NUMBER, UNIT_COST from V_ITEM_MASTER where PART = '{0}' and QUANTITY > '0'", V.Global.sPart,  V.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtLot", "Con", V.Local.sSQL, True)
+	F.ODBC.Connection!Con.Close
+	
+	'Adding new columns to be used to select the lot/bin records they want to issue the material from
+	f.Data.DataTable.AddColumn("dtLot", "SELECT", "boolean")
+	f.Data.DataTable.SetValue("dtLot",-1,"SELECT",false)
+	f.Data.DataTable.AddColumn("dtLot", "QTY_TO_ISSUE", "Float", 0)
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.LoadDataLot.End
+Program.Sub.cmdLotBin_Click.Start
+'This subroutine displays the lot/bin screen
+
+F.Intrinsic.Control.Try
+
+	v.Local.sTitle.Declare(String)
+	
+	'Setting up new screen's title
+	f.Intrinsic.String.Build("Material Lot/Bin(s) for Part: {0}",v.Global.sPart,v.Local.sTitle)
+	Gui.FormLot..Caption(v.Local.sTitle)
+	
+	'Calling subs to load and format the data to be displayed in the lot screen
+	f.Intrinsic.Control.CallSub("LoadDataLot")
+	f.Intrinsic.Control.CallSub("LoadGridLot")
+	GUI.FormLot..Show
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.cmdLotBin_Click.End
+Program.Sub.LoadGridLot.Start
+'This subroutine formats the lot bin grid
+
+F.Intrinsic.Control.Try
+
+	v.Local.fReturn.Declare(Float)
+	
+	'''Setting properties
+	GUI.FormLot.gscgLot.AddGridviewFromDatatable("gvLot", "dtLot")
+	
+	''General Gridview properties
+	GUI.FormLot.gscgLot.SetGridviewProperty("gvLot", V.Enum.GridViewPropertyNames!EnableAppearanceOddRow, True)
+	GUI.FormLot.gscgLot.SetGridviewProperty("gvLot", V.Enum.GridViewPropertyNames!RowAutoHeight, True)
+	GUI.FormLot.gscgLot.SetGridviewProperty("gvLot", V.Enum.GridViewPropertyNames!ColumnPanelRowHeight, 45)
+	GUI.FormLot.gscgLot.SetGridviewProperty("gvLot", V.Enum.GridViewPropertyNames!EnableAppearanceFocusedRow, True) 
+	GUI.FormLot.gscgLot.SetGridviewProperty("gvLot", V.Enum.GridViewPropertyNames!ShowAutoFilterRow, True) 
+	GUI.FormLot.gscgLot.SetGridviewProperty("gvLot", "OptionsViewColumnAutoWidth", True)
+	
+	''Column properties
+	'Formatting captions
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "LOT", V.Enum.ColumnPropertyNames!Caption, "Lot")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "BIN", V.Enum.ColumnPropertyNames!Caption, "Bin")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QUANTITY", V.Enum.ColumnPropertyNames!Caption, "Available Qty")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "HEAT", V.Enum.ColumnPropertyNames!Caption, "Heat")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SERIAL_NUMBER", V.Enum.ColumnPropertyNames!Caption, "Serial Number")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "UNIT_COST", V.Enum.ColumnPropertyNames!Caption, "Unit Cost")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!Caption, "Select")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QTY_TO_ISSUE", V.Enum.ColumnPropertyNames!Caption, "Qty to Issue")
+	
+	'Formatting headers
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "LOT", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "BIN", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QUANTITY", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "HEAT", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SERIAL_NUMBER", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "UNIT_COST", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QTY_TO_ISSUE", V.Enum.ColumnPropertyNames!HeaderFontBold, True)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QUANTITY", V.Enum.ColumnPropertyNames!HeaderWordWrap, "Wrap")
+	
+	'Formatting headers allignment
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "LOT", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "BIN", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QUANTITY", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "HEAT", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SERIAL_NUMBER", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "UNIT_COST", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QTY_TO_ISSUE", V.Enum.ColumnPropertyNames!HeaderHAlignment, "Center")
+	
+	'Formatting widths
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "LOT", V.Enum.ColumnPropertyNames!MaxWidth, 90)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "BIN", V.Enum.ColumnPropertyNames!MaxWidth, 90)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QUANTITY", V.Enum.ColumnPropertyNames!MaxWidth, 100)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "HEAT", V.Enum.ColumnPropertyNames!MinWidth, 90)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SERIAL_NUMBER", V.Enum.ColumnPropertyNames!MinWidth, 120)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "UNIT_COST", V.Enum.ColumnPropertyNames!MaxWidth, 120)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!MaxWidth, 60)
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QTY_TO_ISSUE", V.Enum.ColumnPropertyNames!MinWidth, 100)
+	
+	'Enable SELECT column to be checked/unchecked
+	gui.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!AllowEdit, False)
+	gui.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!ReadOnly, True)
+	gui.FormLot.gscgLot.SetColumnProperty("gvLot", "SELECT", V.Enum.ColumnPropertyNames!VisibleIndex, "0")
+	
+	''Fromatting QTY columns
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QUANTITY", V.Enum.ColumnPropertyNames!DisplayCustomNumeric, "#,##0.00")
+	GUI.FormLot.gscgLot.SetColumnProperty("gvLot", "QTY_TO_ISSUE", V.Enum.ColumnPropertyNames!DisplayCustomNumeric, "#,##0.00")
+	
+	'Displaying required quantities in the screen textboxes
+	GUI.FormLot.txtPart.Text(V.Global.sPart)
+	GUI.FormLot.txtQty.Text(V.Global.fTotalMatQty)
+	F.Intrinsic.Math.Round(V.Global.fTotalMatQty, "", V.Global.fRoundQty)
+	GUI.FormLot.txtRoundQty.Text(V.Global.fRoundQty)
+	gui.FormLot.txtQtyRemaining.Text(v.Global.fRoundQty)
+	
+	GUI.FormLot.gscgLot.MainView("gvLot")
+	GUI.FormLot.gscgLot.Visible(True)
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.LoadGridLot.End
+Program.Sub.gscgLot_RowCellClick.Start
+'This subroutine is in charge of doing all the calculations when a lot/bin record is selected, so the program can display the remaining qty.
+
+F.Intrinsic.Control.Try
+
+	V.Local.fQtyRemaining.Declare(Float)
+	V.Local.iReturn.Declare(Long)
+	V.Local.fReturn.Declare(Float)
+	
+	f.Intrinsic.Control.If(v.Args.Column,=,"SELECT")
+		
+		f.Intrinsic.Control.If(V.DataTable.dtLot(V.Args.RowIndex).SELECT!FieldVal, =, False)
+			F.Data.DataTable.SetValue("dtLot", V.Args.RowIndex, V.Args.Column, True, "QTY_TO_ISSUE", V.DataTable.dtLot(V.Args.RowIndex).QUANTITY!FieldVal)
+		f.Intrinsic.Control.Else
+			F.Data.DataTable.SetValue("dtLot", V.Args.RowIndex, V.Args.Column, False, "QTY_TO_ISSUE", 0)
+		f.Intrinsic.Control.EndIf
+		
+		f.Data.DataTable.Compute("dtLot","sum(QTY_TO_ISSUE)", "", v.Local.fQtyRemaining)
+		
+		f.Intrinsic.Control.If(v.Local.fQtyRemaining,<,v.Global.fRoundQty)
+			
+			f.Intrinsic.Math.Sub(v.Global.fRoundQty,v.Local.fQtyRemaining,v.Local.fQtyRemaining)
+			GUI.FormLot.txtQtyRemaining.Text(v.Local.fQtyRemaining)
+		
+		f.Intrinsic.Control.Else
+			
+			f.Intrinsic.UI.Msgbox("Selected qty is greater than total material qty required.  Autocomplete?", "ERROR", "4", V.Local.iReturn)
+			
+			f.Intrinsic.Control.If(v.Local.iReturn,=, 6)
+				
+				f.Intrinsic.Math.Sub(v.Global.fRoundQty,v.Local.fQtyRemaining,v.Local.fQtyRemaining)
+				F.Intrinsic.Math.Add(V.DataTable.dtLot(V.Args.RowIndex).QUANTITY!FieldVal, v.Local.fQtyRemaining, V.Local.fReturn)
+				F.Data.DataTable.SetValue("dtLot", V.Args.RowIndex, V.Args.Column, True, "QTY_TO_ISSUE", V.Local.fReturn)
+				GUI.FormLot.txtQtyRemaining.Text(0)
+				
+			F.Intrinsic.Control.Else
+				
+				F.Data.DataTable.SetValue("dtLot", V.Args.RowIndex, V.Args.Column, False, "QTY_TO_ISSUE", 0)
+			
+			f.Intrinsic.Control.EndIf
+			
+		f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+
+Program.Sub.gscgLot_RowCellClick.End
+Program.Sub.cmIssue_Click.Start
+'This subroutine issues the material to the selected WOs
+
+F.Intrinsic.Control.Try
+
+	V.Local.iCounter.Declare(Long)
+	V.Local.iCounter2.Declare(Long)
+	v.Local.fJobQty.Declare(Float)
+	v.Local.fQtyToIssue.Declare(Float)
+	v.Local.fRemainingQty.Declare(Float)
+	v.Local.fNewQtyToIssue.Declare(Float)
+	V.Local.sQtyIssue.Declare(String)
+	v.Local.sDateClose.Declare(String)
+	v.Local.sSQL.Declare(String)
+	
+	'Creating new dt with selected records
+	F.Data.DataView.Create("dtLot","dvLot",22,"SELECT = True","QTY_TO_ISSUE DESC")
+	F.Data.DataView.ToDataTable("dtLot","dvLot","dtLotBin",True)
+	F.Data.DataView.Close("dtLot","dvLot")
+	
+	F.Data.DataTable.AddColumn("dtLotBin", "LOT_CLOSED", "Boolean", False)
+	
+	'Looping through dt to add the records to the callwrapper 6016 dt
+	F.Intrinsic.Control.For(v.Local.iCounter,0,v.DataTable.dtJobs.RowCount--,1)
+		
+		V.Local.fJobQty.Set(v.DataTable.dtJobs(v.Local.iCounter).MAT_QTY!FieldVal)
+		F.Data.DataView.Create("dtLotBin","dvLotBin",22,"LOT_CLOSED = False","")
+		
+		F.Intrinsic.Control.For(v.Local.iCounter2,0,v.DataView.dtLotBin!dvLotBin.RowCount--,1)
+			
+			V.Local.fQtyToIssue.Set(v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).QTY_TO_ISSUE!FieldVal)
+			F.Intrinsic.Math.Sub(V.Local.fJobQty, V.Local.fQtyToIssue, V.Local.fRemainingQty)
+			
+			F.Intrinsic.Control.If(V.Local.fRemainingQty, >=, 0)
+			
+				F.Intrinsic.String.Build("{0}", V.Local.fQtyToIssue, V.Local.sQtyIssue)
+				f.Intrinsic.String.Format(V.Local.sQtyIssue,"###,##0.0000",v.Local.sQtyIssue)
+			
+				F.Data.DataTable.AddRow("450100","PART", v.DataTable.dtJobs(v.Local.iCounter).PART!FieldVal,"Rev", "","Location", "","Quantity", v.Local.sQtyIssue,"Lot",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).LOT!FieldVal,"Bin",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).BIN!FieldVal,"Heat",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).HEAT!FieldVal,"Serial",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).SERIAL_NUMBER!FieldVal,"WONumber", v.DataTable.dtJobs(v.Local.iCounter).JOB!FieldVal,"WOSuffix",v.DataTable.dtJobs(v.Local.iCounter).SUFFIX!FieldVal,"WOSeq", v.DataTable.dtJobs(v.Local.iCounter).MATL_SEQ!FieldVal)
+				V.Local.fJobQty.Set(V.Local.fRemainingQty)
+				F.Data.DataView.SetValue("dtLotBin", "dvLotBin", v.Local.iCounter2, "LOT_CLOSED", True)
+				F.Intrinsic.Math.Sub(v.Local.iCounter2, 1,v.Local.iCounter2)
+				
+			F.Intrinsic.Control.ElseIf(V.Local.fRemainingQty, <, 0)
+				
+				F.Intrinsic.String.Build("{0}", V.Local.fJobQty, V.Local.sQtyIssue)
+				f.Intrinsic.String.Format(V.Local.sQtyIssue,"###,##0.0000",v.Local.sQtyIssue)
+			
+				F.Data.DataTable.AddRow("450100","PART", v.DataTable.dtJobs(v.Local.iCounter).PART!FieldVal,"Rev", "","Location", "","Quantity", v.Local.sQtyIssue,"Lot",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).LOT!FieldVal,"Bin",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).BIN!FieldVal,"Heat",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).HEAT!FieldVal,"Serial",v.DataView.dtLotBin!dvLotBin(v.Local.iCounter2).SERIAL_NUMBER!FieldVal,"WONumber", v.DataTable.dtJobs(v.Local.iCounter).JOB!FieldVal,"WOSuffix",v.DataTable.dtJobs(v.Local.iCounter).SUFFIX!FieldVal,"WOSeq", v.DataTable.dtJobs(v.Local.iCounter).MATL_SEQ!FieldVal)
+				F.Intrinsic.Math.Abs(V.Local.fRemainingQty,v.Local.fNewQtyToIssue)
+				F.Data.DataView.SetValue("dtLotBin", "dvLotBin", v.Local.iCounter2, "QTY_TO_ISSUE", v.Local.fNewQtyToIssue)
+				f.Intrinsic.Control.ExitFor(v.Local.iCounter2)
+				
+			F.Intrinsic.Control.EndIf
+			
+		F.Intrinsic.Control.Next(v.Local.iCounter2)
+		F.Data.DataView.Close("dtLotBin", "dvLotBin")
+		
+	F.Intrinsic.Control.Next(v.Local.iCounter)
+	
+	'Calling issue material callwrapper
+	f.Intrinsic.Control.CallSub(450100Sync)
+	
+	'Displaying message box to let the user know the material was issued properly
+	f.Intrinsic.UI.Msgbox("Material has been issued to the selected Work Orders.","SUCCESS!")
+	
+	'Calling unload subs
+	F.Intrinsic.Control.CallSub("FormLot_UnLoad")
+	F.Intrinsic.Control.CallSub("FormFS_UnLoad")
+	
+F.Intrinsic.Control.Catch
+
+	F.Intrinsic.Control.CallSub(CatchError)
+	
+F.Intrinsic.Control.EndTry
+Program.Sub.cmIssue_Click.End
+Program.Sub.CatchError.Start
+'To display the error
+F.Intrinsic.String.Build("Project: {0}{1}{1}Subroutine: {2}{1}Error Occurred {3} with description {4}{1}{1}GAB Version: {5}", V.Ambient.ScriptPath, V.Ambient.Newline, V.Ambient.SubroutineCalledFrom, V.Ambient.ErrorNumber, V.Ambient.ErrorDescription, V.Ambient.GABVersion, V.Global.sError) 
+F.Intrinsic.UI.Msgbox(V.Global.sError)
+F.Intrinsic.Control.CallSub("FormFS_UnLoad")
+Program.Sub.CatchError.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$apadilla$}$20220310152012717$}$Lag9STqBJOmNXSbd5+msRcBWPGz0aFqSzPePUG9qWbzFtPTQCfT4qQBpbWkL/639cJx/ZIXi6OCVogBgxQttvw==
+Program.Sub.Comments.End
